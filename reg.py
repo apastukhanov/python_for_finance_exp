@@ -20,8 +20,6 @@ df = pd.concat([micex[['Adj Close']],ya[['Adj Close']],gazp[['Adj Close']],sber[
 
 df.columns=['IMOEX','YA','GAZP','SBER']
 
-df.tail()
-
 
 print('# Correlation coefficients')
 print(df.corr())
@@ -30,9 +28,12 @@ print(df.corr())
 X=df[['YA','GAZP','SBER']]
 Y=df['IMOEX']
 
-model.fit(X.iloc[:-10],Y.iloc[:-10])
+x_trian = X.iloc[:-10]
+y_train = Y.iloc[:-10]
 
-r_sq = model.score(X,Y)
+model.fit(x_trian,y_train)
+
+r_sq = model.score(x_trian,y_train)
 
 print('coefficient of determination:', r_sq)
 print('intercept:', model.intercept_)
